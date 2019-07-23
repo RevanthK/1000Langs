@@ -81,7 +81,7 @@ class BibleComAPl(object):
         res=BibleComAPl.make_parallel(20,self.find_meta_data,self.find_all_bibles_biblecom().items())
         del res['https://www.bible.com/versions']
         df=pd.DataFrame(list(res.values())).rename(index=str,columns={idx:val for idx,val in enumerate(['url','language_iso','Description','Year','language_name'])})
-        df['trans_ID']=[x.split('/')[0:-1][-1] for x in df.url.tolist()]
+        df['trans_ID']=[str(x).split('/')[0:-1][-1] for x in df.url.tolist()]
         df=df.set_index('url')
         df.to_csv('../meta/biblecom.tsv', sep='\t', index=True)
 
